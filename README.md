@@ -1,3 +1,33 @@
+# Javascript Code runner
+
+## Functional spec
+1. The component should include a template tag with class 'Code--displayed' containing the code to be run
+2. The component may include a template tag with class 'Code--hidden' containing some code to be hidden but executed before the displayed code
+3. Isolated component (can be re-used twice on the same page)
+4. Ability to set the code editor height and the console height through parameters
+5. Ability to edit or not the code with the "editable" param
+
+## Technical spec
+- Main component: CodeRunner
+  - Props: 
+    - editor-height
+    - console-height
+    - editable
+    - title
+    - logo
+    - locale
+  - Sub-components:
+    - Editor:
+      - Props:
+        - editable
+        - height
+    - Commands
+      - RunButton
+      - ResetButton (if editable)
+    - Console
+      - height
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
