@@ -1,6 +1,7 @@
-version: "3.7"
+version: "3.6"
 services:
   web:
+    container_name: js-code-runner
     build: .
     command: sleep 10d
     volumes:
