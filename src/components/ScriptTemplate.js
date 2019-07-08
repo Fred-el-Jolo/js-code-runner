@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 function ScriptTemplate(props) {
-  // Declare a new state variable, which we'll call "count"
-  const [isHidden, setIsHidden] = useState(false);
-
+  
   useEffect(() => {
-    console.log('JS detected !!! :' + props.children);
-  });
+    console.log(`JS code : ${props.children}`);
+  }, [props.children]);
 
   return (
-    <template>
-      {props.children}
-    </template>
+    <div>
+      <template>
+        {props.children}
+      </template>
+    </div>
   );
 }
 

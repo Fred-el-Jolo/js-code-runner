@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import CodeRunner from "./CodeRunner";
 import ScriptTemplate from "./components/ScriptTemplate";
 import * as serviceWorker from './serviceWorker';
 
-// ReactDOM.render(<App />, document.getElementById("root"));
 ReactDOM.render(
 <CodeRunner >
-    <ScriptTemplate>
+    <ScriptTemplate hidden="true">
         let x = 2;
-        console.log(x);
+    </ScriptTemplate>
+    <ScriptTemplate>
+        let y = x+1;
+        console.log(y);
     </ScriptTemplate>
 </CodeRunner>
 , document.getElementById("root"));
