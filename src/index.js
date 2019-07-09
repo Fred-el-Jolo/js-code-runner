@@ -2,18 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import CodeRunner from "./CodeRunner";
-import ScriptTemplate from "./components/ScriptTemplate";
+import ScriptEditor from "./components/ScriptEditor";
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
 <CodeRunner >
-    <ScriptTemplate hidden="true">
+    <ScriptEditor hidden="true">
         let x = 2;
-    </ScriptTemplate>
-    <ScriptTemplate>
+    </ScriptEditor>
+    <ScriptEditor>
         let y = x+1;
         console.log(y);
-    </ScriptTemplate>
+    </ScriptEditor>
 </CodeRunner>
 , document.getElementById("root"));
 
