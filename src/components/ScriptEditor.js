@@ -5,19 +5,21 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
 
 function ScriptEditor(props) {
-  const [code, setCode] = useState(props.children);
+  const [code] = useState(props.code);
   const containerEl = useRef(null);
-
+  
   useEffect(() => {
-    if (!props.hidden) {
-      CodeMirror(containerEl.current, {
-        mode: "javascript",
-        value: code,
-        theme: "material",
-        lineWrapping: true,
-        lineNumbers: true,
-      });
-    }
+    // Create a new CodeMirror instance
+    const codeMirrorInstance = CodeMirror(containerEl.current, {
+      mode: "javascript",
+      value: code,
+      theme: "material",
+      lineWrapping: true,
+      lineNumbers: true,
+    });
+
+    // Register the change event and dispatch it to the parent
+    codeMirrorInstance.on('change', (instance) => {props.onCodeChange(instance.getValue())});
   });
 
   return (

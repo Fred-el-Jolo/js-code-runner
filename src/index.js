@@ -2,22 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import CodeRunner from "./CodeRunner";
-import ScriptEditor from "./components/ScriptEditor";
 import * as serviceWorker from './serviceWorker';
 
+const js_01 = `let x = 41;`;
+const js_02 = `let y = x+1;
+console.log(y);`;
+
 ReactDOM.render(
-<CodeRunner >
-    <ScriptEditor hidden="true">
-{
-`let y = x+1;`
-}
-    </ScriptEditor>
-    <ScriptEditor>
-{
-`let y = x+1;
-console.log(y);`
-}
-    </ScriptEditor>
+<CodeRunner hiddenSnippet={js_01}
+    snippet={js_02}>
 </CodeRunner>
 , document.getElementById("root"));
 
