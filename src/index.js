@@ -8,11 +8,15 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
 <CodeRunner >
     <ScriptEditor hidden="true">
-        let x = 2;
+{
+`let y = x+1;`
+}
     </ScriptEditor>
     <ScriptEditor>
-        let y = x+1;
-        console.log(y);
+{
+`let y = x+1;
+console.log(y);`
+}
     </ScriptEditor>
 </CodeRunner>
 , document.getElementById("root"));
