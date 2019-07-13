@@ -5,22 +5,34 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
 
 function ScriptEditor(props) {
-  const [code] = useState(props.code);
+  const [codeMirrorInstance, setCodeMirrorInstance] = useState(null);
   const containerEl = useRef(null);
-  
+
   useEffect(() => {
+    console.log('Init code mirror instance');
     // Create a new CodeMirror instance
-    const codeMirrorInstance = CodeMirror(containerEl.current, {
+    setCodeMirrorInstance(CodeMirror(containerEl.current, {
       mode: "javascript",
-      value: code,
+      value: props.code,
       theme: "material",
       lineWrapping: true,
       lineNumbers: true,
-    });
+    }));
+  }, []);
 
+  useEffect(() => {
     // Register the change event and dispatch it to the parent
-    codeMirrorInstance.on('change', (instance) => {props.onCodeChange(instance.getValue())});
-  });
+    if (codeMirrorInstance != null) {
+      codeMirrorInstance.on('change', (instance) => props.onCodeChange(instance.getValue()) );
+    }
+  }, [codeMirrorInstance]);
+
+  useEffect(() => {
+    console.log('Updating code mirror instance');
+    if (codeMirrorInstance != null) {
+      codeMirrorInstance.setValue(props.code);
+    }
+  }, [props.code]);
 
   return (
     <div ref={containerEl}>
