@@ -10,11 +10,23 @@ let y = x+1;
 console.log(y);
 console.log('... finishing');
 console.log('Terminated !!!');`;
+const js_03 = `let foo = 'bar';
+console.log('foo=' + foo);
+foo += '-baz';
+console.log('foo=' + foo);
+console.log('YEAHHHHHHHHHHH');
+`;
 
 ReactDOM.render(
-<CodeRunner hiddenSnippet={js_01}
-    snippet={js_02}>
-</CodeRunner>
+<div>
+    <CodeRunner title="JS test number 01"
+        hiddenSnippet={js_01}
+        snippet={js_02}>
+    </CodeRunner>
+    <CodeRunner title="JS test number 02"
+        snippet={js_03}>
+    </CodeRunner>
+</div>
 , document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
