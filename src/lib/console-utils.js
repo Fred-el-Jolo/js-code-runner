@@ -128,38 +128,43 @@ const consoleUtils = {
      * Writes the provided content to the editor’s output area
      * @param {String} content - The content to write to output
      */
-    writeOutput: function(content) {
-        'use strict';
-        var output = document.querySelector('#console code');
-        var outputContent = output.textContent;
-        var newLogItem = '> ' + content + '\n';
-        output.textContent = outputContent + newLogItem;
-    }
+    // writeOutput: function(content) {
+    //     'use strict';
+    //     var output = document.querySelector('#console code');
+    //     var outputContent = output.textContent;
+    //     var newLogItem = '> ' + content + '\n';
+    //     output.textContent = outputContent + newLogItem;
+    // }
 };
 
-export const initConsole = function () {
-    global.originalConsoleLogger = console.log; // eslint-disable-line no-console
-    global.originalConsoleError = console.error;
-    global.console.error = function(loggedItem) {
-        consoleUtils.writeOutput(loggedItem);
-        // do not swallow console.error
-        global.originalConsoleError.apply(console, arguments);
-    };
+export default consoleUtils;
 
-    global.console.log = function() {
-        var formattedList = [];
-        for (var i = 0, l = arguments.length; i < l; i++) {
-            var formatted = consoleUtils.formatOutput(arguments[i]);
-            formattedList.push(formatted);
-        }
-        var output = formattedList.join(' ');
-        consoleUtils.writeOutput(output);
-        // do not swallow console.log
-        global.originalConsoleLogger.apply(console, arguments);
-    };
-};
+// export const initConsole = function (writeOutputCallback) {
+//     global.originalConsoleLogger = console.log; // eslint-disable-line no-console
+//     global.originalConsoleError = console.error;
+//     global.console.error = function(loggedItem) {
+//         writeOutputCallback(loggedItem);
+//         // do not swallow console.error
+//         global.originalConsoleError.apply(console, arguments);
+//     };
 
-export const resetConsole = function () {
-    global.console.error = global.originalConsoleError;
-    global.console.log = global.originalConsoleLogger;
-};
+//     global.console.log = function() {
+//         var formattedList = [];
+//         for (var i = 0, l = arguments.length; i < l; i++) {
+//             var formatted = consoleUtils.formatOutput(arguments[i]);
+//             formattedList.push(formatted);
+//         }
+//         var output = formattedList.join(' ');
+//         writeOutputCallback(output);
+//         // do not swallow console.log
+//         global.originalConsoleLogger.apply(console, arguments);
+//     };
+//     alert('logger updated !!!');
+// };
+
+// export const resetConsole = function () {
+//     global.console.error = global.originalConsoleError;
+//     global.console.log = global.originalConsoleLogger;
+
+//     console.log('reset stuff');
+// };

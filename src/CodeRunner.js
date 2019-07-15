@@ -1,37 +1,34 @@
 import React, {useState, useEffect} from "react";
+import "./code-runner.css";
 import ScriptEditor from "./components/ScriptEditor";
-import {initConsole, resetConsole} from "./lib/console-utils";
+import Console from "./components/Console";
+import useCustomLogger from "./hooks/useCustomLogger"
 
 function CodeRunner(props) {
   const [codeSnippet, setCodeSnippet] = useState(props.snippet);
   const [hiddenCodeSnippet] = useState(props.hiddenSnippet);
   const [fullCodeSnippet, setFullCodeSnippet] = useState("");
 
+  const [logs, runCodeWithCustomLogger] = useCustomLogger();
+
   const changeCodeSnippet = (newCode) => {
     console.log(`New code snippet : ${newCode}`);
     setCodeSnippet(newCode);
   }
 
-  useEffect(() => {
-    const concatSnippet = `${hiddenCodeSnippet == null ? '' : hiddenCodeSnippet};${codeSnippet == null ? '' : codeSnippet}`;
-    setFullCodeSnippet(concatSnippet);
-  }, [codeSnippet, hiddenCodeSnippet]);
-
   const runCode = () => {
-    initConsole();
-    try {
-      // Create a new Function from the code, and immediately execute it.
-      new Function(fullCodeSnippet)();
-    } catch (event) {
-        console.log('Error: ' + event.message);
-    }
-    resetConsole();
+    runCodeWithCustomLogger(fullCodeSnippet);
   };
 
   const reset = () => {
     console.log('Reset !!!!');
     setCodeSnippet(props.snippet);
   };
+
+  useEffect(() => {
+    const concatSnippet = `${hiddenCodeSnippet == null ? '' : hiddenCodeSnippet};${codeSnippet == null ? '' : codeSnippet}`;
+    setFullCodeSnippet(concatSnippet);
+  }, [codeSnippet, hiddenCodeSnippet]);
 
   return (
     <div>
@@ -40,7 +37,7 @@ function CodeRunner(props) {
       <button onClick={() => runCode()}>Run</button>
       <button onClick={() => reset()}>Reset</button>
       <br />
-      <div id="console"><code></code></div>
+      <Console logs={logs} />
     </div>
   );
 }

@@ -28,8 +28,8 @@ function ScriptEditor(props) {
   }, [codeMirrorInstance]);
 
   useEffect(() => {
-    console.log('Updating code mirror instance');
-    if (codeMirrorInstance != null) {
+    if (codeMirrorInstance != null && codeMirrorInstance.getValue() !== props.code) {
+      console.log('Updating code mirror instance');
       codeMirrorInstance.setValue(props.code);
     }
   }, [props.code]);

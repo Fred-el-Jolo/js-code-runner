@@ -5,8 +5,11 @@ import CodeRunner from "./CodeRunner";
 import * as serviceWorker from './serviceWorker';
 
 const js_01 = `let x = 41;`;
-const js_02 = `let y = x+1;
-console.log(y);`;
+const js_02 = `console.log('starting...');
+let y = x+1;
+console.log(y);
+console.log('... finishing');
+console.log('Terminated !!!');`;
 
 ReactDOM.render(
 <CodeRunner hiddenSnippet={js_01}
