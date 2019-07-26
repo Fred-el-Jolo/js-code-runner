@@ -24,7 +24,7 @@ storiesOf('CodeRunner', module)
   snippet={js_03} />);
 
 storiesOf('ScriptEditor', module)
-  .add('Code editor', () => <ScriptEditor code={js_01} ></ScriptEditor>);
+  .add('Code editor', () => <ScriptEditor code={js_01} onCodeChange={action('script-editor-change')}></ScriptEditor>);
 
 storiesOf('Console', module)
   .add('Output logs', () => <Console logs={logs} />);
