@@ -28,8 +28,12 @@ function useCustomLogger() {
     originalConsoleLogger.apply(console, args);
   };
 
-  function runCode(fullCodeSnippet) {
+  const resetLogs = () => {
     setLogs(logArray => []);
+  };
+
+  function runCode(fullCodeSnippet) {
+    resetLogs();
     initCustomConsole();
     try {
       // Create a new Function from the code, and immediately execute it.
@@ -40,7 +44,7 @@ function useCustomLogger() {
     resetCustomConsole();
   }
 
-  return [logs, runCode];
+  return [logs, resetLogs, runCode];
 }
 
 export default useCustomLogger;
