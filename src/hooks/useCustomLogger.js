@@ -28,12 +28,20 @@ function useCustomLogger() {
     originalConsoleLogger.apply(console, args);
   };
 
+<<<<<<< HEAD
   const resetLogs = () => {
+=======
+  const clearLogs = () => {
+>>>>>>> 3ed2e24399fa0a9f72ee62112d93579e21cfa6b4
     setLogs(logArray => []);
   };
 
   function runCode(fullCodeSnippet) {
+<<<<<<< HEAD
     resetLogs();
+=======
+    clearLogs();
+>>>>>>> 3ed2e24399fa0a9f72ee62112d93579e21cfa6b4
     initCustomConsole();
     try {
       // Create a new Function from the code, and immediately execute it.
@@ -44,7 +52,11 @@ function useCustomLogger() {
     resetCustomConsole();
   }
 
+<<<<<<< HEAD
   return [logs, resetLogs, runCode];
+=======
+  return [logs, clearLogs, runCode];
+>>>>>>> 3ed2e24399fa0a9f72ee62112d93579e21cfa6b4
 }
 
 export default useCustomLogger;

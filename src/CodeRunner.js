@@ -8,8 +8,12 @@ function CodeRunner(props) {
   const [codeSnippet, setCodeSnippet] = useState(props.snippet);
   const [hiddenCodeSnippet] = useState(props.hiddenSnippet);
   const [fullCodeSnippet, setFullCodeSnippet] = useState("");
+<<<<<<< HEAD
 
   const [logs, resetLogs, runCodeWithCustomLogger] = useCustomLogger();
+=======
+  const [logs, clearLogs, runCodeWithCustomLogger] = useCustomLogger();
+>>>>>>> 3ed2e24399fa0a9f72ee62112d93579e21cfa6b4
 
   const changeCodeSnippet = (newCode) => {
     console.log(`New code snippet : ${newCode}`);
@@ -23,7 +27,11 @@ function CodeRunner(props) {
   const reset = () => {
     console.log('Reset !!!!');
     setCodeSnippet(props.snippet);
+<<<<<<< HEAD
     resetLogs();
+=======
+    clearLogs();
+>>>>>>> 3ed2e24399fa0a9f72ee62112d93579e21cfa6b4
   };
 
   useEffect(() => {
@@ -33,6 +41,12 @@ function CodeRunner(props) {
 
   return (
     <section>
+<<<<<<< HEAD
+=======
+      <header>
+        <h4>{props.title}</h4>
+      </header>
+>>>>>>> 3ed2e24399fa0a9f72ee62112d93579e21cfa6b4
       <ScriptEditor code={codeSnippet} onCodeChange={changeCodeSnippet}></ScriptEditor>
       <br />
       <button onClick={() => runCode()}>Run</button>

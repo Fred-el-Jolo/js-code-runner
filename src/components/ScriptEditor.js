@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import CodeMirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
 
 function ScriptEditor(props) {
@@ -14,7 +13,7 @@ function ScriptEditor(props) {
     setCodeMirrorInstance(CodeMirror(containerEl.current, {
       mode: "javascript",
       value: props.code,
-      theme: "material",
+      theme: "default",
       lineWrapping: true,
       lineNumbers: true,
     }));
