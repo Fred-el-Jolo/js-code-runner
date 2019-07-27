@@ -17,10 +17,10 @@ console.log('Terminated !!!');`;
 const logs = ['starting...', '42', '... finishing', 'Terminated !!!'];
 
 storiesOf('CodeRunner', module)
-  .add('Code runner with explicit snippet', () => <CodeRunner snippet={js_01} />);
+  .add('Code runner with explicit snippet', () => <CodeRunner title="JS test number 01" snippet={js_01} />);
 
 storiesOf('CodeRunner', module)
-  .add('Code runner with hidden snippet', () => <CodeRunner hiddenSnippet={js_02}
+  .add('Code runner with hidden snippet', () => <CodeRunner title="JS test number 02" hiddenSnippet={js_02}
   snippet={js_03} />);
 
 storiesOf('ScriptEditor', module)

@@ -4,30 +4,41 @@ import './index.css';
 import CodeRunner from "./CodeRunner";
 import * as serviceWorker from './serviceWorker';
 
-const js_01 = `let x = 41;`;
-const js_02 = `console.log('starting...');
-let y = x+1;
-console.log(y);
-console.log('... finishing');
-console.log('Terminated !!!');`;
-const js_03 = `let foo = 'bar';
-console.log('foo=' + foo);
-foo += '-baz';
-console.log('foo=' + foo);
-console.log('YEAHHHHHHHHHHH');
+const js_01 = `const asyncExec = (callback, data) => {
+    setTimeout(() => callback(null, data), 0);
+};
+const api = {
+    getUser: (login, callback) => asyncExec(callback, 'Hi' + login + ', you are logged in.'),
+    getGeoLocation: (user, callback) => asyncExec(callback, user + ' You live in Nice.'),
+    getWeather: (location, callback) => asyncExec(callback, location + ' It is sunny.'),
+    notifyWeather: (data, callback) => asyncExec(callback, 'Notified: ' + data),
+}
+
+api.getUser('fred', function(err, user) {
+    api.getGeoLocation(user, function(err, location) {
+        api.getWeather(location, function(err, weather) {
+            api.notifyWeather(weather, function(err, data) {
+                console.log(data);
+            });
+        });
+    });
+});
 `;
+const js_02 = `console.log('42');`;
+
 
 ReactDOM.render(
 <div>
     <CodeRunner title="JS test number 01"
-        hiddenSnippet={js_01}
         snippet={js_02}>
     </CodeRunner>
-    <CodeRunner title="JS test number 02"
-        snippet={js_03}>
+    <CodeRunner title="JS test number 01"
+        snippet={js_01}>
     </CodeRunner>
 </div>
 , document.getElementById("root"));
+
+//setTimeout(() => {ReactDOM.unmountComponentAtNode(document.getElementById("root"))}, 10000);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

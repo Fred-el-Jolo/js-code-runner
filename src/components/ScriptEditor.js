@@ -34,7 +34,7 @@ function ScriptEditor(props) {
   }, [props.code]);
 
   return (
-    <div ref={containerEl}>
+    <div className={props.className ? props.className : ''} ref={containerEl}>
     </div>
   );
 }

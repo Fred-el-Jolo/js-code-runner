@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from "react";
-import "./code-runner.css";
+import "./codeRunner.scss";
 import ScriptEditor from "./components/ScriptEditor";
 import Console from "./components/Console";
 import useCustomLogger from "./hooks/useCustomLogger"
 
 function CodeRunner(props) {
+  const [fullScreen, setFullScreen] = useState(false);
   const [codeSnippet, setCodeSnippet] = useState(props.snippet);
   const [hiddenCodeSnippet] = useState(props.hiddenSnippet);
   const [fullCodeSnippet, setFullCodeSnippet] = useState("");
   const [logs, clearLogs, runCodeWithCustomLogger] = useCustomLogger();
+
+  const toggleFullScreen = () => {
+    setFullScreen(!fullScreen);
+  };
 
   const changeCodeSnippet = (newCode) => {
     console.log(`New code snippet : ${newCode}`);
@@ -31,11 +36,10 @@ function CodeRunner(props) {
   }, [codeSnippet, hiddenCodeSnippet]);
 
   return (
-    <section>
-      <header>
-        <h4>{props.title}</h4>
-      </header>
-      <ScriptEditor code={codeSnippet} onCodeChange={changeCodeSnippet}></ScriptEditor>
+    <section className={`CodeRunner ${fullScreen ? 'CodeRunner_fullscreen' : ''}`}>
+      <h4 className="CodeRunner-Title">{props.title}</h4>
+      <ScriptEditor className="CodeRunner-ScriptEditor" code={codeSnippet} onCodeChange={changeCodeSnippet}></ScriptEditor>
+      <button onClick={() => toggleFullScreen()}>Full screen</button>
       <br />
       <button onClick={() => runCode()}>Run</button>
       <button onClick={() => reset()}>Reset</button>
