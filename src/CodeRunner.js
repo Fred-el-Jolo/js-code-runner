@@ -3,6 +3,8 @@ import "./codeRunner.scss";
 import ScriptEditor from "./components/ScriptEditor";
 import Console from "./components/Console";
 import useCustomLogger from "./hooks/useCustomLogger"
+import * as devLogger from 'loglevel';
+devLogger.setLevel(devLogger.levels.DEBUG);
 
 function CodeRunner(props) {
   const [fullScreen, setFullScreen] = useState(false);
@@ -16,7 +18,7 @@ function CodeRunner(props) {
   };
 
   const changeCodeSnippet = (newCode) => {
-    console.log(`New code snippet : ${newCode}`);
+    devLogger.debug(`New code snippet : ${newCode}`);
     setCodeSnippet(newCode);
   }
 
@@ -25,7 +27,7 @@ function CodeRunner(props) {
   };
 
   const reset = () => {
-    console.log('Reset !!!!');
+    devLogger.info('Reset !!!');
     setCodeSnippet(props.snippet);
     clearLogs();
   };

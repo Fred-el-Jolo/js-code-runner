@@ -5,6 +5,7 @@
   "dependencies": {
     "acorn-loose": "^6.1.0",
     "codemirror": "^5.48.0",
+    "loglevel": "^1.6.3",
     "node-sass": "^4.12.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
