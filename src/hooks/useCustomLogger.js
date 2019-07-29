@@ -18,12 +18,12 @@ function useCustomLogger() {
     }
   }, []);
 
-  const initCustomConsole = () => {
+  const attachCustomConsole = () => {
     console.log = customLogger;
     console.error = customErrorLogger;
   };
 
-  const resetCustomConsole = () => {
+  const detachCustomConsole = () => {
     console.log = originalConsole.log;
     console.error = originalConsole.error;
     console.log('Reset done !');
@@ -47,15 +47,14 @@ function useCustomLogger() {
 
   function runCode(fullCodeSnippet) {
     clearLogs();
-    initCustomConsole();
+    attachCustomConsole();
     try {
       // Create a new Function from the code, and immediately execute it.
       new Function(fullCodeSnippet)();
     } catch (event) {
         console.log('Error: ' + event.message);
     }
-    //resetCustomConsole();
-    
+    //detachCustomConsole();
   }
 
   return [logs, clearLogs, runCode];
