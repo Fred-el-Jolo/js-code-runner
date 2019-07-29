@@ -16,10 +16,10 @@ const consoleUtils = {
                 output += '"' + input[i] + '"';
             } else if (Array.isArray(input[i])) {
                 output += 'Array [';
-                output += this.formatArray(input[i]);
+                output += consoleUtils.formatArray(input[i]);
                 output += ']';
             } else {
-                output += this.formatOutput(input[i]);
+                output += consoleUtils.formatOutput(input[i]);
             }
 
             if (i < input.length - 1) {
@@ -57,7 +57,7 @@ const consoleUtils = {
             var arrayLength = input.length;
 
             if (arrayLength > 0) {
-                return objectName + ' [' + this.formatArray(input) + ']';
+                return objectName + ' [' + consoleUtils.formatArray(input) + ']';
             } else {
                 return objectName + ' []';
             }
@@ -81,7 +81,7 @@ const consoleUtils = {
                         formattedChild +
                         key +
                         ': ' +
-                        this.formatOutput(input[key]);
+                        consoleUtils.formatOutput(input[key]);
                 }
             }
             return objectName + ' { ' + formattedChild + ' }';
@@ -119,9 +119,9 @@ const consoleUtils = {
             return '"' + input + '"';
         } else if (Array.isArray(input)) {
             // check the contents of the array
-            return 'Array [' + this.formatArray(input) + ']';
+            return 'Array [' + consoleUtils.formatArray(input) + ']';
         } else {
-            return this.formatObject(input);
+            return consoleUtils.formatObject(input);
         }
     },
     /**
@@ -137,34 +137,4 @@ const consoleUtils = {
     // }
 };
 
-export default consoleUtils;
-
-// export const initConsole = function (writeOutputCallback) {
-//     global.originalConsoleLogger = console.log; // eslint-disable-line no-console
-//     global.originalConsoleError = console.error;
-//     global.console.error = function(loggedItem) {
-//         writeOutputCallback(loggedItem);
-//         // do not swallow console.error
-//         global.originalConsoleError.apply(console, arguments);
-//     };
-
-//     global.console.log = function() {
-//         var formattedList = [];
-//         for (var i = 0, l = arguments.length; i < l; i++) {
-//             var formatted = consoleUtils.formatOutput(arguments[i]);
-//             formattedList.push(formatted);
-//         }
-//         var output = formattedList.join(' ');
-//         writeOutputCallback(output);
-//         // do not swallow console.log
-//         global.originalConsoleLogger.apply(console, arguments);
-//     };
-//     alert('logger updated !!!');
-// };
-
-// export const resetConsole = function () {
-//     global.console.error = global.originalConsoleError;
-//     global.console.log = global.originalConsoleLogger;
-
-//     console.log('reset stuff');
-// };
+export default consoleUtils.formatOutput;

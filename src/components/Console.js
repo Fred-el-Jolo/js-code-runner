@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import formatOutput from "../lib/console-utils";
 
 function Console(props) {
     const [logOutput, setLogOutput] = useState([]);
@@ -7,10 +8,10 @@ function Console(props) {
         setLogOutput(logOutput => []);
         for (let singleLog of props.logs) {
             if (typeof singleLog === 'string' && singleLog.startsWith('Error: ')) {
-                setLogOutput(logOutput => logOutput.concat(singleLog));
+                setLogOutput(logOutput => logOutput.concat(formatOutput(singleLog)));
             }
             else {
-                setLogOutput(logOutput => logOutput.concat(`> ${singleLog}`));
+                setLogOutput(logOutput => logOutput.concat(`> ${formatOutput(singleLog)}`));
             }
         }
     }, [props.logs]);
