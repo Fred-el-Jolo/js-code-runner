@@ -6,42 +6,70 @@ import useCustomLogger from "./hooks/useCustomLogger"
 import * as devLogger from 'loglevel';
 devLogger.setLevel(devLogger.levels.DEBUG);
 
-function CodeRunner(props) {
+/**
+ * CodeRunner component
+ * 
+ * @param {any} props:
+ *  - snippet: the code snippet displayed
+ *  - hiddenSnippet: hidden code snippet executed before the snippet code
+ *  - title: title displayed over the component
+ */
+function CodeRunner({snippet, hiddenSnippet, title}) {
   const [fullScreen, setFullScreen] = useState(false);
-  const [codeSnippet, setCodeSnippet] = useState(props.snippet);
-  const [hiddenCodeSnippet] = useState(props.hiddenSnippet);
+  const [codeSnippet, setCodeSnippet] = useState(snippet);
+  const [hiddenCodeSnippet] = useState(hiddenSnippet);
   const [fullCodeSnippet, setFullCodeSnippet] = useState("");
   const [logs, clearLogs, runCodeWithCustomLogger] = useCustomLogger();
 
+  /**
+   * Toggle full screen on this component
+   */
   const toggleFullScreen = () => {
     setFullScreen(!fullScreen);
   };
 
+  /**
+   * Update the code snippet
+   * @param {any} newCode - The new code snippet
+   */
   const changeCodeSnippet = (newCode) => {
     devLogger.debug(`New code snippet : ${newCode}`);
     setCodeSnippet(newCode);
   }
 
+  /**
+   * Run the code snippet and track the logs into the specific console output
+   */
   const runCode = () => {
     runCodeWithCustomLogger(fullCodeSnippet);
   };
 
+  /**
+   * Reset the code snippet to the initial value and clear the console output
+   */
   const reset = () => {
     devLogger.info('Reset !!!');
-    setCodeSnippet(props.snippet);
+    setCodeSnippet(snippet);
     clearLogs();
   };
 
+  /**
+   * Sets the fullCodeSnippet state property when the code snippet and/or the hidden code
+   * snippet are updated
+   */
   useEffect(() => {
     const concatSnippet = `${hiddenCodeSnippet == null ? '' : hiddenCodeSnippet};${codeSnippet == null ? '' : codeSnippet}`;
     setFullCodeSnippet(concatSnippet);
   }, [codeSnippet, hiddenCodeSnippet]);
 
+  // Render component
   return (
     <section className={`CodeRunner ${fullScreen ? 'CodeRunner_fullscreen' : ''}`}>
-      <h4 className="CodeRunner-Title">{props.title}</h4>
+      <h4 className="CodeRunner-Title">
+        {title}
+        <span role="button" onClick={() => toggleFullScreen()}>Full screen</span>
+      </h4>
       <ScriptEditor className="CodeRunner-ScriptEditor" code={codeSnippet} onCodeChange={changeCodeSnippet}></ScriptEditor>
-      <button onClick={() => toggleFullScreen()}>Full screen</button>
       <br />
       <button onClick={() => runCode()}>Run</button>
       <button onClick={() => reset()}>Reset</button>

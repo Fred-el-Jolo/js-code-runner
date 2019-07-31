@@ -9,7 +9,6 @@ const consoleUtils = {
      * @returns Formatted output as a string.
      */
     formatArray: function(input) {
-        'use strict';
         var output = '';
         for (var i = 0, l = input.length; i < l; i++) {
             if (typeof input[i] === 'string') {
@@ -39,7 +38,6 @@ const consoleUtils = {
      * @returns Formatted output as a string.
      */
     formatObject: function(input) {
-        'use strict';
         var bufferDataViewRegExp = /^(ArrayBuffer|SharedArrayBuffer|DataView)$/;
         var complexArrayRegExp = /^(Int8Array|Int16Array|Int32Array|Uint8Array|Uint16Array|Uint32Array|Uint8ClampedArray|Float32Array|Float64Array|BigInt64Array|BigUint64Array)$/;
         var objectName = input.constructor.name;
@@ -99,7 +97,6 @@ const consoleUtils = {
      * @returns Formatted output as a string.
      */
     formatOutput: function(input) {
-        'use strict';
         if (
             input === undefined ||
             input === null ||
