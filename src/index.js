@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faExpandArrowsAlt } from '@fortawesome/free-solid-svg-icons'
 import './index.css';
 import CodeRunner from "./CodeRunner";
 import * as serviceWorker from './serviceWorker';
+
+// Create fontawesome library
+library.add(faExpandArrowsAlt);
 
 const js_01 = `const asyncExec = (callback, data) => {
     setTimeout(() => callback(null, data), 0);
@@ -24,7 +29,8 @@ api.getUser('fred', function(err, user) {
     });
 });
 `;
-const js_02 = `console.log('42');`;
+const js_02 = `const x = 'ixe';
+console.log(\`X is \${x}, f**k yeah !!!\`);`;
 
 
 ReactDOM.render(

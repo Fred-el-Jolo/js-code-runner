@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "./codeRunner.scss";
 import ScriptEditor from "./components/ScriptEditor";
 import Console from "./components/Console";
@@ -67,9 +68,15 @@ function CodeRunner({snippet, hiddenSnippet, title}) {
     <section className={`CodeRunner ${fullScreen ? 'CodeRunner_fullscreen' : ''}`}>
       <h4 className="CodeRunner-Title">
         {title}
-        <span role="button" onClick={() => toggleFullScreen()}>Full screen</span>
       </h4>
-      <ScriptEditor className="CodeRunner-ScriptEditor" code={codeSnippet} onCodeChange={changeCodeSnippet}></ScriptEditor>
+      <div className="CodeRunner-EditorWrapper">
+        <div className="CodeRunner-FullTextButton">
+          <span role="button" onClick={() => toggleFullScreen()}>
+            <FontAwesomeIcon icon="expand-arrows-alt" />
+          </span>
+        </div>
+        <ScriptEditor className="CodeRunner-ScriptEditor" code={codeSnippet} onCodeChange={changeCodeSnippet}></ScriptEditor>
+      </div>
       <br />
       <button onClick={() => runCode()}>Run</button>
       <button onClick={() => reset()}>Reset</button>

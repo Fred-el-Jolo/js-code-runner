@@ -11,6 +11,17 @@
         vertical-align: middle;
     }
 
+    &-EditorWrapper {
+        position: relative;
+    }
+
+    &-FullTextButton {
+        position: absolute;
+        right: 1em;
+        z-index: 2;
+        cursor: pointer;
+    }
+
     &-ScriptEditor {
         min-height: 280px;
         font-size: 20px;
