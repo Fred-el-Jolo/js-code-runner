@@ -23,12 +23,6 @@ function useCustomLogger() {
     console.error = customErrorLogger;
   };
 
-  const detachCustomConsole = () => {
-    console.log = originalConsole.log;
-    console.error = originalConsole.error;
-    console.log('Reset done !');
-  };
-
   const customErrorLogger = function (...args) {
     setLogs(logArray => logArray.concat(`Error: ${args}`));
     // do not swallow console.error
@@ -54,7 +48,6 @@ function useCustomLogger() {
     } catch (event) {
         console.log('Error: ' + event.message);
     }
-    //detachCustomConsole();
   }
 
   return [logs, clearLogs, runCode];
